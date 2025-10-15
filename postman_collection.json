@@ -1,0 +1,50 @@
+{
+  "info": {
+    "_postman_id": "apv-backend-collection",
+    "name": "APV Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:4000" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Registrar veterinario",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{baseUrl}}/api/veterinarios", "host": ["{{baseUrl}}"], "path": ["api","veterinarios"] },
+        "body": { "mode": "raw", "raw": "{\"nombre\":\"Juan\",\"email\":\"a@b.com\",\"password\":\"123456\"}" }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "url": { "raw": "{{baseUrl}}/api/veterinarios/login", "host": ["{{baseUrl}}"], "path": ["api","veterinarios","login"] },
+        "body": { "mode": "raw", "raw": "{\"email\":\"a@b.com\",\"password\":\"123456\"}" }
+      }
+    },
+    {
+      "name": "Perfil (protegido)",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/veterinarios/perfil", "host": ["{{baseUrl}}"], "path": ["api","veterinarios","perfil"] }
+      }
+    },
+    {
+      "name": "Crear Paciente (protegido)",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/pacientes", "host": ["{{baseUrl}}"], "path": ["api","pacientes"] },
+        "body": { "mode": "raw", "raw": "{\"nombre\":\"Rex\",\"propietario\":\"Juan\",\"email\":\"j@d.com\",\"fecha\":\"2025-10-09\",\"sintomas\":\"Nada\"}" }
+      }
+    }
+  ]
+}
